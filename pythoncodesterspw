@@ -1,0 +1,47 @@
+stage.set_background("drawbridge")
+sprite = codesters.Sprite("dragon", 0, -75)
+
+
+word = "python"
+
+secret_letters = list(word)
+# if word is "python", this will make:
+#     ["p", "y", "t", "h", "o", "n"]
+
+sprite.say("Guess my word and I'll let you cross!")
+
+stage.wait(2)
+
+sprite.say("I'll give you one letter at a time.  After each letter you can try to guess!")
+
+stage.wait(2)
+
+sprite.say("But don't take too long!")
+
+stage.wait(2)
+
+revealed_letters = ""
+
+for letter in secret_letters:
+    sprite.say("None shall pass without the secret word.")
+    revealed_letters += letter
+    sprite.say(revealed_letters)
+    stage.wait(2)
+    
+    revealed_length = len(revealed_letters)
+    word_length = len(word)
+    stage.wait(2)
+    
+    if revealed_length == word_length:
+        sprite.say("You took too long!")
+        break
+    
+    guess = sprite.ask("What do you think my word is?")
+    
+    if guess != word:
+        sprite.say("Nope, try again.")
+        stage.wait(2)
+    
+    if guess == word:
+        sprite.say("You guessed my word!")
+        break
